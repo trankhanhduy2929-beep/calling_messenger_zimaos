@@ -6,7 +6,7 @@ Repo này chỉ chứa tệp triển khai. Mã nguồn không được đưa và
 
 - Image: `ghcr.io/trankhanhduy2929-beep/calling_messenger_hub`
 - Kiến trúc: `amd64`, `arm64`
-- Phiên bản trong compose: `0.18.0`
+- Phiên bản trong compose: `0.19.0`
 - Cổng mặc định: `3030`
 - Dữ liệu lâu dài: thư mục `./data`
 
@@ -86,7 +86,7 @@ curl http://127.0.0.1:3030/health
 Kết quả hợp lệ có dạng:
 
 ```json
-{"status":"ok","version":"0.18.0"}
+{"status":"ok","version":"0.19.0"}
 ```
 
 ## API token
@@ -169,11 +169,17 @@ Không nhập đường dẫn `/dev/bus/usb/...` trong bản Docker. Hãy dùng 
 
 Nếu ZimaOS chạy trong máy ảo, cần passthrough modem USB vào máy ảo trước.
 
+## Giám sát và MQTT
+
+- Mở **Cài đặt → MQTT & Home Assistant** trong giao diện để bật MQTT Discovery. Add-on tự tạo cảm biến cho tài khoản online, cuộc gọi, cảnh báo chưa xác nhận, sức khỏe SIM, bản cập nhật và cường độ sóng từng SIM.
+- Prometheus scrape `http://IP-CUA-ZIMAOS:3030/metrics`. Endpoint không yêu cầu token; chỉ mở cổng 3030 trong LAN tin cậy hoặc đặt sau reverse proxy có xác thực.
+- Trang **SIM & số dư** có badge sức khỏe tổng hợp; nút **Kiểm tra cập nhật** trong **Cài đặt** chỉ báo phiên bản mới, không tự nâng cấp container.
+
 ## Biến môi trường
 
 | Biến | Mặc định | Mô tả |
 | --- | --- | --- |
-| `CMH_VERSION` | `0.18.0` | Tag image cần chạy |
+| `CMH_VERSION` | `0.19.0` | Tag image cần chạy |
 | `CMH_BIND_IP` | `0.0.0.0` | IP host dùng để publish cổng |
 | `CMH_PORT` | `3030` | Cổng web/API trên host |
 | `TZ` | `Asia/Ho_Chi_Minh` | Múi giờ |
