@@ -53,6 +53,13 @@ Repo này chỉ chứa tệp triển khai. Mã nguồn không được đưa và
 
 Nếu ZimaOS không tự đọc `.env`, nhập các biến môi trường tương ứng trong phần cấu hình ứng dụng.
 
+Nếu ZimaOS không nhận đường dẫn tương đối `./data`, đổi volume trong compose thành đường dẫn tuyệt đối:
+
+```yaml
+volumes:
+  - "/DATA/AppData/calling-messenger-hub/data:/data"
+```
+
 ## Cài bằng Docker CLI
 
 ```sh
