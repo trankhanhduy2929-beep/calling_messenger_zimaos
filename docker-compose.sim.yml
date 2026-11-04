@@ -1,0 +1,4 @@
+services:
+  calling-messenger-hub:
+    devices:
+      - "${CMH_SIM_HOST_DEVICE:-/dev/ttyUSB2}:${CMH_SIM_CONTAINER_DEVICE:-/dev/ttyUSB2}"

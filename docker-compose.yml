@@ -1,0 +1,35 @@
+name: calling-messenger-hub
+
+services:
+  calling-messenger-hub:
+    image: ghcr.io/trankhanhduy2929-beep/calling_messenger_hub:${CMH_VERSION:-0.18.0}
+    container_name: calling-messenger-hub
+    restart: unless-stopped
+    init: true
+    stop_grace_period: 30s
+    ports:
+      - "${CMH_BIND_IP:-0.0.0.0}:${CMH_PORT:-3030}:3030"
+    environment:
+      TZ: "${TZ:-Asia/Ho_Chi_Minh}"
+      TGVOIP_DATA_DIR: "/data"
+      XDG_CACHE_HOME: "/data/cache"
+      TGVOIP_API_TOKEN: "${CMH_API_TOKEN:-}"
+      TGVOIP_API_ID: "${TGVOIP_API_ID:-}"
+      TGVOIP_API_HASH: "${TGVOIP_API_HASH:-}"
+      TGVOIP_LICENSE_KEY: "${TGVOIP_LICENSE_KEY:-}"
+      TGVOIP_TTS_VOICE: "${TGVOIP_TTS_VOICE:-vi-VN-HoaiMyNeural}"
+      TGVOIP_TTS_RATE: "${TGVOIP_TTS_RATE:-+0%}"
+      TGVOIP_TTS_CACHE: "${TGVOIP_TTS_CACHE:-true}"
+    volumes:
+      - "./data:/data"
+    healthcheck:
+      test: ["CMD-SHELL", "python3 -c \"import socket; socket.create_connection(('127.0.0.1', 3030), 5).close()\" || exit 1"]
+      interval: 30s
+      timeout: 10s
+      start_period: 45s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
