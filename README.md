@@ -6,9 +6,15 @@ Repo này chỉ chứa tệp triển khai. Mã nguồn không được đưa và
 
 - Image: `ghcr.io/trankhanhduy2929-beep/calling_messenger_hub`
 - Kiến trúc: `amd64`, `arm64`
-- Phiên bản trong compose: `0.19.6`
+- Phiên bản trong compose: `0.20.0`
 - Cổng mặc định: `3030`
 - Dữ liệu lâu dài: thư mục `./data`
+
+## Có gì mới trong 0.20.0
+
+- Gửi, đọc, tìm kiếm và trả lời SMS riêng cho từng tài khoản SIM.
+- Cảnh báo ngưỡng sức khỏe SIM qua Telegram và/hoặc action Home Assistant, có chống lặp.
+- Sao lưu và khôi phục dữ liệu bằng tệp `.cmhb` mã hóa AES-256-GCM; cần khởi động lại sau khi khôi phục.
 
 ## Yêu cầu
 
@@ -86,7 +92,7 @@ curl http://127.0.0.1:3030/health
 Kết quả hợp lệ có dạng:
 
 ```json
-{"status":"ok","version":"0.19.6"}
+{"status":"ok","version":"0.20.0"}
 ```
 
 ## API token
@@ -179,7 +185,7 @@ Nếu ZimaOS chạy trong máy ảo, cần passthrough modem USB vào máy ảo 
 
 | Biến | Mặc định | Mô tả |
 | --- | --- | --- |
-| `CMH_VERSION` | `0.19.6` | Tag image cần chạy |
+| `CMH_VERSION` | `0.20.0` | Tag image cần chạy |
 | `CMH_BIND_IP` | `0.0.0.0` | IP host dùng để publish cổng |
 | `CMH_PORT` | `3030` | Cổng web/API trên host |
 | `TZ` | `Asia/Ho_Chi_Minh` | Múi giờ |
@@ -216,6 +222,8 @@ Thư mục `data/` chứa:
 - API token tự sinh.
 
 Sao lưu toàn bộ thư mục `data/` trước khi nâng cấp hoặc chuyển máy. Không chia sẻ thư mục này vì có thể chứa phiên đăng nhập và token.
+
+Trong giao diện, mở **Cài đặt → Sao lưu & khôi phục** để tạo tệp `.cmhb` được mã hóa AES-256-GCM bằng mật khẩu riêng. Tệp này chỉ chứa cấu hình, tài khoản, phiên đăng nhập và token cần thiết; không chứa cache TTS. Khôi phục sẽ ghi đè tệp trùng tên và yêu cầu khởi động lại container. Nếu quên mật khẩu, không thể giải mã bản sao lưu.
 
 ## Cập nhật
 
