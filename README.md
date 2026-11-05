@@ -6,7 +6,7 @@ Repo này chỉ chứa tệp triển khai. Mã nguồn không được đưa và
 
 - Image: `ghcr.io/trankhanhduy2929-beep/calling_messenger_hub`
 - Kiến trúc: `amd64`, `arm64`
-- Phiên bản trong compose: `0.19.3`
+- Phiên bản trong compose: `0.19.4`
 - Cổng mặc định: `3030`
 - Dữ liệu lâu dài: thư mục `./data`
 
@@ -86,7 +86,7 @@ curl http://127.0.0.1:3030/health
 Kết quả hợp lệ có dạng:
 
 ```json
-{"status":"ok","version":"0.19.3"}
+{"status":"ok","version":"0.19.4"}
 ```
 
 ## API token
@@ -153,6 +153,12 @@ Sau đó vào giao diện web, thêm tài khoản SIM:
 - Baudrate: `115200`
 - Driver: `Tự động`, `A7670` hoặc `EC20`
 
+### Dữ liệu 4G
+
+Trong **SIM & số dư → Dữ liệu 4G**, lưu APN rồi bật phiên data. Giao diện hiển thị IP, loại mạng và dung lượng nếu modem hỗ trợ.
+
+Add-on chỉ điều khiển PDP context của modem. Route mặc định, NAT và failover LAN → 4G vẫn do NetworkManager hoặc script trên host quản lý.
+
 ### Nạp driver trên host
 
 Bản Docker không tự nạp kernel module như add-on Home Assistant. Nếu host chưa có cổng tty cho modem:
@@ -179,7 +185,7 @@ Nếu ZimaOS chạy trong máy ảo, cần passthrough modem USB vào máy ảo 
 
 | Biến | Mặc định | Mô tả |
 | --- | --- | --- |
-| `CMH_VERSION` | `0.19.3` | Tag image cần chạy |
+| `CMH_VERSION` | `0.19.4` | Tag image cần chạy |
 | `CMH_BIND_IP` | `0.0.0.0` | IP host dùng để publish cổng |
 | `CMH_PORT` | `3030` | Cổng web/API trên host |
 | `TZ` | `Asia/Ho_Chi_Minh` | Múi giờ |
