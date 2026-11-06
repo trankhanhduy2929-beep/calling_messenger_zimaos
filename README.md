@@ -6,15 +6,15 @@ Repo này chỉ chứa tệp triển khai. Mã nguồn không được đưa và
 
 - Image: `ghcr.io/trankhanhduy2929-beep/calling_messenger_hub`
 - Kiến trúc: `amd64`, `arm64`
-- Phiên bản trong compose: `0.20.0`
+- Phiên bản trong compose: `0.21.0`
 - Cổng mặc định: `3030`
 - Dữ liệu lâu dài: thư mục `./data`
 
-## Có gì mới trong 0.20.0
+## Có gì mới trong 0.21.0
 
-- Gửi, đọc, tìm kiếm và trả lời SMS riêng cho từng tài khoản SIM.
-- Cảnh báo ngưỡng sức khỏe SIM qua Telegram và/hoặc action Home Assistant, có chống lặp.
-- Sao lưu và khôi phục dữ liệu bằng tệp `.cmhb` mã hóa AES-256-GCM; cần khởi động lại sau khi khôi phục.
+- Tách **cổng AT điều khiển** và **cổng sự kiện** cho Quectel EC20/EC25; cuộc gọi, DTMF và SMS không bị chặn khi đang tra USSD.
+- Tự quay về chế độ một cổng nếu cổng sự kiện lỗi hoặc firmware không route URC riêng.
+- Nút **Quét cổng USB** trong biểu mẫu thêm SIM, kèm gợi ý vai trò từng cổng `ttyUSB`/`ttyACM`.
 
 ## Yêu cầu
 
@@ -92,7 +92,7 @@ curl http://127.0.0.1:3030/health
 Kết quả hợp lệ có dạng:
 
 ```json
-{"status":"ok","version":"0.20.0"}
+{"status":"ok","version":"0.21.0"}
 ```
 
 ## API token
@@ -155,9 +155,22 @@ CMH_SIM_CONTAINER_DEVICE=/dev/ttyUSB2
 Sau đó vào giao diện web, thêm tài khoản SIM:
 
 - Kiểu kết nối: `Serial / USB (UART)`
-- Cổng serial: đúng đường dẫn trong container, thường là `/dev/ttyUSB2`
+- Cổng điều khiển: đúng đường dẫn trong container, thường là `/dev/ttyUSB2`
+- Cổng sự kiện: để trống nếu chỉ có một cổng; với EC20/EC25 hai cổng AT, dùng cổng còn lại như `/dev/ttyUSB3`
 - Baudrate: `115200`
 - Driver: `Tự động`, `A7670` hoặc `EC20`
+
+Nếu dùng cổng sự kiện riêng, ánh xạ thêm thiết bị trong `docker-compose.sim.yml`:
+
+```yaml
+services:
+  calling-messenger-hub:
+    devices:
+      - "${CMH_SIM_HOST_DEVICE:-/dev/ttyUSB2}:${CMH_SIM_CONTAINER_DEVICE:-/dev/ttyUSB2}"
+      - "/dev/ttyUSB3:/dev/ttyUSB3"
+```
+
+Không phải firmware nào cũng tách URC ra cổng thứ hai; kiểm tra bằng **Quét cổng USB** và để trống cổng sự kiện nếu không chắc.
 
 ### Nạp driver trên host
 
@@ -185,7 +198,7 @@ Nếu ZimaOS chạy trong máy ảo, cần passthrough modem USB vào máy ảo 
 
 | Biến | Mặc định | Mô tả |
 | --- | --- | --- |
-| `CMH_VERSION` | `0.20.0` | Tag image cần chạy |
+| `CMH_VERSION` | `0.21.0` | Tag image cần chạy |
 | `CMH_BIND_IP` | `0.0.0.0` | IP host dùng để publish cổng |
 | `CMH_PORT` | `3030` | Cổng web/API trên host |
 | `TZ` | `Asia/Ho_Chi_Minh` | Múi giờ |
