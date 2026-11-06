@@ -6,16 +6,16 @@ Repo này chỉ chứa tệp triển khai. Mã nguồn không được đưa và
 
 - Image: `ghcr.io/trankhanhduy2929-beep/calling_messenger_hub`
 - Kiến trúc: `amd64`, `arm64`
-- Phiên bản trong compose: `0.22.1`
+- Phiên bản trong compose: `0.23.0`
 - Cổng mặc định: `3030`
 - Dữ liệu lâu dài: thư mục `./data`
 
-## Có gì mới trong 0.22.1
+## Có gì mới trong 0.23.0
 
-- Toàn bộ cấu hình cần thiết nằm trong **Cài đặt** của giao diện; không cần dùng tab **Configuration** của add-on.
-- Thêm mục **Mặc định add-on** để chỉnh giọng/tốc độ TTS, thời gian chờ, số lần gọi và giới hạn cuộc gọi.
-- License key nhập trong giao diện; license server/site URL tự dùng mặc định.
-- Giữ nguyên dữ liệu MQTT và mặc định đang nhập khi trang tự làm mới.
+- Custom integration `2.4.0` thêm `binary_sensor` cho API, license, MQTT, sự cố SIM và bản cập nhật.
+- Thêm button làm mới trạng thái/kiểm tra cập nhật, switch bật tắt cầu nối MQTT và event cuộc gọi/chuông/báo động.
+- Thêm notify service `notify.calling_messenger_hub`, hỗ trợ `target` hoặc `data.to`.
+- Thêm file diagnostics cho integration; token và mật khẩu được che khi tải chẩn đoán.
 
 ## Yêu cầu
 
@@ -93,7 +93,7 @@ curl http://127.0.0.1:3030/health
 Kết quả hợp lệ có dạng:
 
 ```json
-{"status":"ok","version":"0.22.1"}
+{"status":"ok","version":"0.23.0"}
 ```
 
 ## API token
@@ -199,7 +199,7 @@ Nếu ZimaOS chạy trong máy ảo, cần passthrough modem USB vào máy ảo 
 
 | Biến | Mặc định | Mô tả |
 | --- | --- | --- |
-| `CMH_VERSION` | `0.22.1` | Tag image cần chạy |
+| `CMH_VERSION` | `0.23.0` | Tag image cần chạy |
 | `CMH_BIND_IP` | `0.0.0.0` | IP host dùng để publish cổng |
 | `CMH_PORT` | `3030` | Cổng web/API trên host |
 | `TZ` | `Asia/Ho_Chi_Minh` | Múi giờ |
