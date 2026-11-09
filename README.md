@@ -6,9 +6,15 @@ Repo này chỉ chứa tệp triển khai. Mã nguồn không được đưa và
 
 - Image: `ghcr.io/trankhanhduy2929-beep/calling_messenger_hub`
 - Kiến trúc: `amd64`, `arm64`
-- Phiên bản trong compose: `0.24.20`
+- Phiên bản trong compose: `0.24.21`
 - Cổng mặc định: `3030`
 - Dữ liệu lâu dài: thư mục `./data`
+
+## Có gì mới trong 0.24.21
+
+- Sửa lỗi SIM báo **Chưa đăng ký mạng** trên WCDMA/HSPA+ khi `AT+CEREG?` trả `0,4` nhưng `AT+CREG?`/`AT+CGREG?` đã đăng ký.
+- Gọi thoại và kiểm tra số dư/USSD không còn bị chặn sai; trạng thái đăng ký CS/PS/EPS được đọc riêng.
+- Giữ nguyên các cải tiến 0.24.20: quét/chọn nhà mạng, chuyển vùng và lưu lựa chọn mạng theo mô-đun.
 
 ## Có gì mới trong 0.24.20
 
@@ -93,7 +99,7 @@ curl http://127.0.0.1:3030/health
 Kết quả hợp lệ có dạng:
 
 ```json
-{"status":"ok","version":"0.24.20"}
+{"status":"ok","version":"0.24.21"}
 ```
 
 ## API token
@@ -199,7 +205,7 @@ Nếu ZimaOS chạy trong máy ảo, cần passthrough modem USB vào máy ảo 
 
 | Biến | Mặc định | Mô tả |
 | --- | --- | --- |
-| `CMH_VERSION` | `0.24.20` | Tag image cần chạy |
+| `CMH_VERSION` | `0.24.21` | Tag image cần chạy |
 | `CMH_BIND_IP` | `0.0.0.0` | IP host dùng để publish cổng |
 | `CMH_PORT` | `3030` | Cổng web/API trên host |
 | `TZ` | `Asia/Ho_Chi_Minh` | Múi giờ |
