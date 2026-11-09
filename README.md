@@ -6,9 +6,16 @@ Repo này chỉ chứa tệp triển khai. Mã nguồn không được đưa và
 
 - Image: `ghcr.io/trankhanhduy2929-beep/calling_messenger_hub`
 - Kiến trúc: `amd64`, `arm64`
-- Phiên bản trong compose: `0.24.21`
+- Phiên bản trong compose: `0.24.22`
 - Cổng mặc định: `3030`
 - Dữ liệu lâu dài: thư mục `./data`
+
+## Có gì mới trong 0.24.22
+
+- Gửi SMS kiểm tra đăng ký mạng trước để báo lỗi rõ ràng thay vì chờ modem 45 giây.
+- Tăng thời gian chờ xác nhận SMS, tự hủy prompt treo bằng ESC và cảnh báo **tin có thể đã gửi** khi nhà mạng xác nhận muộn.
+- Quét mạng luôn hiển thị nhà mạng đang dùng, kể cả khi `AT+COPS=?` bỏ sót nhà mạng hiện tại.
+- Giữ nguyên các cải tiến 0.24.21: đọc đăng ký CS/PS/EPS, gọi thoại/USSD và quét/chọn nhà mạng.
 
 ## Có gì mới trong 0.24.21
 
@@ -99,7 +106,7 @@ curl http://127.0.0.1:3030/health
 Kết quả hợp lệ có dạng:
 
 ```json
-{"status":"ok","version":"0.24.21"}
+{"status":"ok","version":"0.24.22"}
 ```
 
 ## API token
@@ -205,7 +212,7 @@ Nếu ZimaOS chạy trong máy ảo, cần passthrough modem USB vào máy ảo 
 
 | Biến | Mặc định | Mô tả |
 | --- | --- | --- |
-| `CMH_VERSION` | `0.24.21` | Tag image cần chạy |
+| `CMH_VERSION` | `0.24.22` | Tag image cần chạy |
 | `CMH_BIND_IP` | `0.0.0.0` | IP host dùng để publish cổng |
 | `CMH_PORT` | `3030` | Cổng web/API trên host |
 | `TZ` | `Asia/Ho_Chi_Minh` | Múi giờ |
