@@ -6,17 +6,16 @@ Repo này chỉ chứa tệp triển khai. Mã nguồn không được đưa và
 
 - Image: `ghcr.io/trankhanhduy2929-beep/calling_messenger_hub`
 - Kiến trúc: `amd64`, `arm64`
-- Phiên bản trong compose: `0.24.0`
+- Phiên bản trong compose: `0.24.18`
 - Cổng mặc định: `3030`
 - Dữ liệu lâu dài: thư mục `./data`
 
-## Có gì mới trong 0.24.0
+## Có gì mới trong 0.24.18
 
-- Add-on phát sự kiện realtime qua SSE tại `GET /api/events/stream`, có heartbeat và tự kết nối lại.
-- Custom integration `2.5.0` nhận cuộc gọi, chuông, báo động, SMS/OTP và sự kiện tài khoản gần như ngay lập tức.
-- Mỗi tài khoản có `binary_sensor` online riêng; mỗi SIM có thêm cảm biến sóng, nhà mạng, số dư và hạn dùng.
-- Event SMS/OTP không chứa nội dung tin nhắn hoặc mã OTP; vẫn giữ polling làm phương án dự phòng.
-- Thêm bộ test Home Assistant và CI hassfest/HACS cho integration.
+- API gọi trả về ngay sau khi tạo cuộc gọi; TTS Telegram/Zalo được tổng hợp trong nền.
+- Tăng độ ổn định SIM/EC20: kiểm tra VoLTE/IMS, fallback CSFB và reset trạng thái cuộc gọi trước cuộc kế tiếp.
+- Chẩn đoán AT/USSD tốt hơn, giải mã sender SMS GSM packed và bỏ qua cuộc gọi LTE PS khi kiểm tra SIM rảnh.
+- Tinh chỉnh âm lượng EC20 và xử lý USSD A7670 an toàn hơn.
 
 ## Yêu cầu
 
@@ -94,7 +93,7 @@ curl http://127.0.0.1:3030/health
 Kết quả hợp lệ có dạng:
 
 ```json
-{"status":"ok","version":"0.24.0"}
+{"status":"ok","version":"0.24.18"}
 ```
 
 ## API token
@@ -200,7 +199,7 @@ Nếu ZimaOS chạy trong máy ảo, cần passthrough modem USB vào máy ảo 
 
 | Biến | Mặc định | Mô tả |
 | --- | --- | --- |
-| `CMH_VERSION` | `0.24.0` | Tag image cần chạy |
+| `CMH_VERSION` | `0.24.18` | Tag image cần chạy |
 | `CMH_BIND_IP` | `0.0.0.0` | IP host dùng để publish cổng |
 | `CMH_PORT` | `3030` | Cổng web/API trên host |
 | `TZ` | `Asia/Ho_Chi_Minh` | Múi giờ |

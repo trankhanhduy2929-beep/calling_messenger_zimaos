@@ -2,7 +2,7 @@ name: calling-messenger-hub
 
 services:
   calling-messenger-hub:
-    image: ghcr.io/trankhanhduy2929-beep/calling_messenger_hub:${CMH_VERSION:-0.24.0}
+    image: ghcr.io/trankhanhduy2929-beep/calling_messenger_hub:${CMH_VERSION:-0.24.18}
     container_name: calling-messenger-hub
     restart: unless-stopped
     init: true
