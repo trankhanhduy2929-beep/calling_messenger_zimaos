@@ -6,17 +6,16 @@ Repo này chỉ chứa tệp triển khai. Mã nguồn không được đưa và
 
 - Image: `ghcr.io/trankhanhduy2929-beep/calling_messenger_hub`
 - Kiến trúc: `amd64`, `arm64`
-- Phiên bản trong compose: `0.24.19`
+- Phiên bản trong compose: `0.24.20`
 - Cổng mặc định: `3030`
 - Dữ liệu lâu dài: thư mục `./data`
 
-## Có gì mới trong 0.24.19
+## Có gì mới trong 0.24.20
 
-- Hiển thị phiên bản ngay trên thanh tiêu đề giao diện.
-- API gọi trả về ngay sau khi tạo cuộc gọi; TTS Telegram/Zalo được tổng hợp trong nền.
-- Tăng độ ổn định SIM/EC20: kiểm tra VoLTE/IMS, fallback CSFB và reset trạng thái cuộc gọi trước cuộc kế tiếp.
-- Chẩn đoán AT/USSD tốt hơn, giải mã sender SMS GSM packed và bỏ qua cuộc gọi LTE PS khi kiểm tra SIM rảnh.
-- Tinh chỉnh âm lượng EC20 và xử lý USSD A7670 an toàn hơn.
+- Thêm khối **Mạng & phủ sóng** cho SIM: xem serving cell, quét nhà mạng và chọn nhà mạng tự động/thủ công.
+- Lưu lựa chọn mạng theo từng mô-đun; tự gửi `AT+COPS=0` khi SIM mất đăng ký nếu bật tự động chọn lại.
+- Hỗ trợ bật/tắt chuyển vùng và hiển thị công nghệ mạng (GSM/WCDMA/LTE/5G NR).
+- Giữ nguyên các cải tiến 0.24.20: hiển thị phiên bản, gọi nhanh, ổn định SIM/EC20, USSD và âm lượng.
 
 ## Yêu cầu
 
@@ -94,7 +93,7 @@ curl http://127.0.0.1:3030/health
 Kết quả hợp lệ có dạng:
 
 ```json
-{"status":"ok","version":"0.24.19"}
+{"status":"ok","version":"0.24.20"}
 ```
 
 ## API token
@@ -200,7 +199,7 @@ Nếu ZimaOS chạy trong máy ảo, cần passthrough modem USB vào máy ảo 
 
 | Biến | Mặc định | Mô tả |
 | --- | --- | --- |
-| `CMH_VERSION` | `0.24.19` | Tag image cần chạy |
+| `CMH_VERSION` | `0.24.20` | Tag image cần chạy |
 | `CMH_BIND_IP` | `0.0.0.0` | IP host dùng để publish cổng |
 | `CMH_PORT` | `3030` | Cổng web/API trên host |
 | `TZ` | `Asia/Ho_Chi_Minh` | Múi giờ |
