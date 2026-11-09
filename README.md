@@ -15,7 +15,7 @@ Repo này chỉ chứa tệp triển khai. Mã nguồn không được đưa và
 - Thêm khối **Mạng & phủ sóng** cho SIM: xem serving cell, quét nhà mạng và chọn nhà mạng tự động/thủ công.
 - Lưu lựa chọn mạng theo từng mô-đun; tự gửi `AT+COPS=0` khi SIM mất đăng ký nếu bật tự động chọn lại.
 - Hỗ trợ bật/tắt chuyển vùng và hiển thị công nghệ mạng (GSM/WCDMA/LTE/5G NR).
-- Giữ nguyên các cải tiến 0.24.20: hiển thị phiên bản, gọi nhanh, ổn định SIM/EC20, USSD và âm lượng.
+- Giữ nguyên các cải tiến 0.24.19: hiển thị phiên bản, gọi nhanh, ổn định SIM/EC20, USSD và âm lượng.
 
 ## Yêu cầu
 
