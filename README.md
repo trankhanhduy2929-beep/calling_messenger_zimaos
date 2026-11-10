@@ -6,9 +6,15 @@ Repo này chỉ chứa tệp triển khai. Mã nguồn không được đưa và
 
 - Image: `ghcr.io/trankhanhduy2929-beep/calling_messenger_hub`
 - Kiến trúc: `amd64`, `arm64`
-- Phiên bản trong compose: `0.24.25`
+- Phiên bản trong compose: `0.24.26`
 - Cổng mặc định: `3030`
 - Dữ liệu lâu dài: thư mục `./data`
+
+## Có gì mới trong 0.24.26
+
+- SIM tự phát hiện mất đăng ký mạng, thử lại nhà mạng thủ công đã chọn trước rồi fallback chọn mạng tự động.
+- Backoff từ 15 giây đến 5 phút và tự bật lại sóng sau nhiều lần thất bại; ghi sự kiện mất/khôi phục mạng.
+- Giữ nguyên kết nối serial khi chỉ mất mạng di động, không mở lại cổng AT không cần thiết.
 
 ## Có gì mới trong 0.24.25
 
@@ -123,7 +129,7 @@ curl http://127.0.0.1:3030/health
 Kết quả hợp lệ có dạng:
 
 ```json
-{"status":"ok","version":"0.24.25"}
+{"status":"ok","version":"0.24.26"}
 ```
 
 ## API token
@@ -229,7 +235,7 @@ Nếu ZimaOS chạy trong máy ảo, cần passthrough modem USB vào máy ảo 
 
 | Biến | Mặc định | Mô tả |
 | --- | --- | --- |
-| `CMH_VERSION` | `0.24.25` | Tag image cần chạy |
+| `CMH_VERSION` | `0.24.26` | Tag image cần chạy |
 | `CMH_BIND_IP` | `0.0.0.0` | IP host dùng để publish cổng |
 | `CMH_PORT` | `3030` | Cổng web/API trên host |
 | `TZ` | `Asia/Ho_Chi_Minh` | Múi giờ |
